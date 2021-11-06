@@ -25,6 +25,17 @@
     /*
       misc styles, nothing to do with CSS variables
     */
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background: var(--base);
+    }
 
     body {
       text-align: center;
@@ -45,6 +56,22 @@
   </style>
 
   <script>
+
+    function handUpdate() {
+      const suffix = this.dataset.sizing || '';
+      // console.log(this.value);
+      const newVal = this.value;
+      document.documentElement.style.setProperty(`--${this.name}`, newVal + suffix);
+
+    }
+    const controls = document.querySelectorAll('.controls input');
+
+    controls.forEach(control => {
+      control.addEventListener('change', handUpdate)
+    })
+    controls.forEach(control => {
+      control.addEventListener('mousemove', handUpdate)
+    })
   </script>
 
 </body>
